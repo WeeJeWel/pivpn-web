@@ -4,7 +4,8 @@ new Vue({
     error: null,
     clients: null,
     clientDelete: null,
-    clientCreate: null,
+    clientCreate: true,
+    clientCreateName: '',
     qrcode: null,
   },
   methods: {
