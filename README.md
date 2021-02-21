@@ -4,6 +4,8 @@
 
 PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 
+![](https://i.imgur.com/ioWxJON.png)
+
 ## Features
 
 * A beautiful interface
