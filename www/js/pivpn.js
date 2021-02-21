@@ -6,6 +6,10 @@ class PiVPNWireGuard {
     const res = await fetch(`/api/wireguard${path}`, {
       method,
     });
+
+    if( res.status === 204 )
+      return undefined;
+      
     const json = await res.json();
 
     if( !res.ok ) {

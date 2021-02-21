@@ -4,7 +4,7 @@ new Vue({
     error: null,
     clients: null,
     clientDelete: null,
-    clientCreate: true,
+    clientCreate: null,
     clientCreateName: '',
     qrcode: null,
   },
@@ -20,11 +20,20 @@ new Vue({
     },
     refresh() {
       this.wg.getClientsStatus()
-        .then(clients => this.clients = clients)
+        .then(clients => {
+          this.clients = clients.map(client => {
+            if( client.name.includes('@') && client.name.includes('.') ) {
+              client.avatar = `https://www.gravatar.com/avatar/${md5(client.name)}?d=blank`
+            }
+
+            return client;
+          });
+        })
         .catch(err => this.error = err);
     },
     createClient() {
-      const name = prompt('Name:');
+      const name = this.clientCreateName;
+      if( !name ) return;
       this.wg.createClient({ name })
         .catch(err => alert(err.message || err.toString()))
         .finally(() => this.refresh())
@@ -33,7 +42,7 @@ new Vue({
       this.wg.deleteClient({ name })
         .catch(err => alert(err.message || err.toString()))
         .finally(() => this.refresh())
-    }
+    },
   },
   filters: {
     timeago: value => {
