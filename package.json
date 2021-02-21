@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "serve": "DEBUG=Server nodemon server.js"
+    "serve": "DEBUG=Server nodemon server.js",
+    "build": "docker build --tag pivpn-web ."
   },
   "author": "Emile Nijssen",
   "license": "GPL",
@@ -22,5 +23,13 @@
     "ignore": [
       "www/*"
     ]
+  },
+  "docker": {
+    "production": {
+      "tags": "latest"
+    },
+    "staging": {
+      "tags": "beta"
+    }
   }
 }
