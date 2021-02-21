@@ -11,6 +11,7 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 * List, create & delete users
 * Show a user's QR code
 * Download a user's profile configuration file
+* See which users are connected
 * Connects to your local PiVPN installation — or remote over SSH
 * Gravatar support 🎉
 
