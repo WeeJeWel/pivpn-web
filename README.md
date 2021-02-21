@@ -9,9 +9,9 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 * A beautiful interface
 * One command to set up
 * List, create & delete users
-* Show QR code for a user
-* Download `user.conf`
-* Connects to your local PiVPN installation
+* Show a user's QR code
+* Download a user's profile configuration file
+* Connects to your local PiVPN installation — or remote over SSH
 * Gravatar support 🎉
 
 ## Requirements
@@ -51,8 +51,8 @@ docker run -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-web
 
 ## Usage
 
-### 1. Open URL
-
 Open `http://<ip-of-your-pi>:51821` and log in with your Raspberry Pi username & password.
 
 > The default Raspbian username is `pi` and the default password is `raspberry`.
+
+> When you client name is a valid Gravatar e-mail, they will be shown with their avatar.
