@@ -1,6 +1,7 @@
 new Vue({
   el: '#app',
   data: {
+    authenticated: false,
     error: null,
     clients: null,
     clientDelete: null,
