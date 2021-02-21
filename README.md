@@ -8,18 +8,18 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 
 ## Features
 
-* A beautiful interface
-* One command to set up
+* A beautiful & easy to use UI
+* Easy installation: just one command
 * List, create & delete users
 * Show a user's QR code
-* Download a user's profile configuration file
+* Download a user's configuration file
 * See which users are connected
+* Log in with your Linux username & password
 * Connects to your local PiVPN installation — or remote over SSH
 * Gravatar support 🎉
 
 ## Requirements
 
-* Raspberry Pi
 * Docker installed
 * PiVPN installed (WireGuard, not OpenVPN)
 * SSH enabled with username & password
@@ -40,7 +40,7 @@ curl -L https://install.pivpn.io | bash
 
 > See [https://pivpn.io](https://pivpn.io) for detailed instructions.
 
-### 3. Install PiVPN-Web
+### 3. Install PiVPN Web
 
 Run this command once to automatically start the service on boot.
 
