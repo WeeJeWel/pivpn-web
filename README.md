@@ -1,6 +1,7 @@
 # PiVPN Web
 
 [![Build & Publish Docker Image to Docker Hub](https://github.com/WeeJeWel/pivpn-web/actions/workflows/deploy.yml/badge.svg?branch=production)](https://github.com/WeeJeWel/pivpn-web/actions/workflows/deploy.yml)
+[![Docker](https://img.shields.io/docker/v/weejewel/pivpn-web/latest)](http://hub.docker.com/repository/docker/weejewel/pivpn-web)
 
 PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 
