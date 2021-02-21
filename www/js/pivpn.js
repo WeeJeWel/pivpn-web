@@ -1,10 +1,16 @@
 'use strict';
 
-class PiVPNWireGuard {
+class PiVPN {
 
-  async call({ method, path }) {
-    const res = await fetch(`/api/wireguard${path}`, {
+  async call({ method, path, body }) {
+    const res = await fetch(`/api${path}`, {
       method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: body
+        ? JSON.stringify(body)
+        : undefined,
     });
 
     if( res.status === 204 )
@@ -19,31 +25,53 @@ class PiVPNWireGuard {
     return json;
   }
 
-  async getClients() {
+  async getSession() {
     return this.call({
       method: 'get',
-      path: '/client',
+      path: '/session',
     });
   }
 
-  async getClientsStatus() {
-    return this.call({
-      method: 'get',
-      path: '/client-status',
-    });
-  }
-
-  async createClient({ name }) {
+  async createSession({ username, password }) {
     return this.call({
       method: 'post',
-      path: `/client/${name}`,
+      path: '/session',
+      body: { username, password },
     });
   }
 
-  async deleteClient({ name }) {
+  async deleteSession() {
     return this.call({
       method: 'delete',
-      path: `/client/${name}`,
+      path: '/session',
+    });
+  }
+
+  async getWireGuardClients() {
+    return this.call({
+      method: 'get',
+      path: '/wireguard/client',
+    });
+  }
+
+  async getWireGuardClientsStatus() {
+    return this.call({
+      method: 'get',
+      path: '/wireguard/client-status',
+    });
+  }
+
+  async createWireGuardClient({ name }) {
+    return this.call({
+      method: 'post',
+      path: `/wireguard/client/${name}`,
+    });
+  }
+
+  async deleteWireGuardClient({ name }) {
+    return this.call({
+      method: 'delete',
+      path: `/wireguard/client/${name}`,
     });
   }
 

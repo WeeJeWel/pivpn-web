@@ -1,8 +1,11 @@
 new Vue({
   el: '#app',
   data: {
-    authenticated: false,
-    error: null,
+    authenticated: null,
+    authenticating: false,
+    username: null,
+    password: null,
+
     clients: null,
     clientDelete: null,
     clientCreate: null,
@@ -20,7 +23,9 @@ new Vue({
       }).format(value);
     },
     refresh() {
-      this.wg.getClientsStatus()
+      if( !this.authenticated ) return;
+
+      this.pi.getWireGuardClientsStatus()
         .then(clients => {
           this.clients = clients.map(client => {
             if( client.name.includes('@') && client.name.includes('.') ) {
@@ -32,15 +37,52 @@ new Vue({
         })
         .catch(err => this.error = err);
     },
+    login(e) {
+      e.preventDefault();
+
+      if( !this.username ) return;
+      if( !this.password ) return;
+      if( this.authenticating ) return;
+
+      this.authenticating = true;
+      this.pi.createSession({
+        username: this.username,
+        password: this.password,
+      })
+        .then(async () => {
+          const session = await this.pi.getSession()
+          this.authenticated = session.authenticated;
+          this.hostname = session.hostname || null;
+          this.username = session.username || null;
+          this.refresh();
+        })
+        .catch(err => {
+          alert(err.message || err.toString());
+        })
+        .finally(() => {
+          this.authenticating = false;
+        })
+    },
+    logout(e) {
+      e.preventDefault();
+
+      this.pi.deleteSession()
+        .then(() => {
+          this.authenticated = false;
+          this.hostname = null;
+          this.username = null;
+          this.clients = null;
+        });
+    },
     createClient() {
       const name = this.clientCreateName;
       if( !name ) return;
-      this.wg.createClient({ name })
+      this.pi.createWireGuardClient({ name })
         .catch(err => alert(err.message || err.toString()))
         .finally(() => this.refresh())
     },
     deleteClient({ name }) {
-      this.wg.deleteClient({ name })
+      this.pi.deleteWireGuardClient({ name })
         .catch(err => alert(err.message || err.toString()))
         .finally(() => this.refresh())
     },
@@ -65,8 +107,18 @@ new Vue({
     }
   },
   mounted() {
-    this.wg = new PiVPNWireGuard();
-    this.refresh();
+    this.pi = new PiVPN();
+    this.pi.getSession()
+      .then(session => {
+        this.authenticated = session.authenticated;
+        this.hostname = session.hostname || null;
+        this.username = session.username || null;
+        this.refresh();
+      })
+      .catch(err => {
+        alert(err.message || err.toString());
+      })
+
     setInterval(() => this.refresh(), 1000);
   },
 });
