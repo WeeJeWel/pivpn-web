@@ -46,7 +46,7 @@ curl -L https://install.pivpn.io | bash
 Run this command once to automatically start the service on boot.
 
 ```bash
-docker run -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-web
+docker run -d -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-web
 ```
 
 > 💡 Remove the `restart=always` flag to prevent auto-start on boot.
