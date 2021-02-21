@@ -22,7 +22,7 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 
 * Docker installed
 * PiVPN installed (WireGuard, not OpenVPN)
-* SSH enabled with username & password
+* SSH enabled
 
 ## Installation
 
@@ -48,14 +48,14 @@ Run this command once to automatically start the service on boot.
 docker run -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-web
 ```
 
-> Remove the `restart=always` flag to prevent auto-start on boot.
+> 💡 Remove the `restart=always` flag to prevent auto-start on boot.
 
-> You can set the environment variable `SSH_HOST` to a hostname/IP to connect to a different PiVPN server than PiVPN Web is running on.
+> 💡 You can set the environment variable `SSH_HOST` to a hostname/IP to connect to a different PiVPN server than PiVPN Web is running on.
 
 ## Usage
 
 Open `http://<ip-of-your-pi>:51821` and log in with your Raspberry Pi username & password.
 
-> The default Raspbian username is `pi` and the default password is `raspberry`.
+> 💡 The default Raspbian username is `pi` and the default password is `raspberry`.
 
-> When you client name is a valid Gravatar e-mail, they will be shown with their avatar.
+> 💡 When you client name is a valid Gravatar e-mail, they will be shown with their avatar.
