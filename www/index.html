@@ -53,9 +53,9 @@
             <div class="flex-grow">
               <div class="text-gray-700" :title="'Created at ' + dateTime(new Date(client.createdAt))">{{client.name}}
               </div>
-              <div class="text-gray-300 text-xs">{{client.iface}}
+              <div v-if="client.allowedIps" class="text-gray-300 text-xs">{{client.iface}}
                 · {{client.allowedIps.split('/')[0]}}
-                <span v-if="client.transferTx !== '0'" title="Download">
+                <span v-if="client.transferTx" title="Download">
                   ·
                   <svg class="align-middle h-3 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                     fill="currentColor">
@@ -65,7 +65,7 @@
                   </svg>
                   {{client.transferTx | bytes}}
                 </span>
-                <span v-if="client.transferTx !== '0'" title="Upload">
+                <span v-if="client.transferRx" title="Upload">
                   ·
                   <svg class="align-middle h-3 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                     fill="currentColor">
@@ -84,6 +84,16 @@
 
             <div class="text-right">
               <div class="text-gray-400">
+
+                <!-- Enable/Disable -->
+                <div @click="disableClient(client)" v-if="client.enabled === true" class="inline-block align-middle rounded-full w-10 h-6 mr-1 bg-green-400 cursor-pointer hover:bg-green-500 transition-all">
+                  <div class="rounded-full w-4 h-4 m-1 ml-5 bg-white"></div>
+                </div>
+                <div @click="enableClient(client)" v-if="client.enabled === false" class="inline-block align-middle rounded-full w-10 h-6 mr-1 bg-gray-200 cursor-pointer hover:bg-gray-300 transition-all">
+                  <div class="rounded-full w-4 h-4 m-1 bg-white"></div>
+                </div>
+
+                <!-- Show QR-->
                 <button class="align-middle bg-gray-100 hover:bg-blue-400 hover:text-white p-2 rounded transition"
                   title="Show QR Code" @click="qrcode = `/api/wireguard/client/${client.name}/qrcode.svg`">
                   <svg class="w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -92,6 +102,8 @@
                       d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                   </svg>
                 </button>
+
+                <!-- Download Config -->
                 <a :href="'/api/wireguard/client/' + client.name + '/configuration'" download
                   class="align-middle inline-block bg-gray-100 hover:bg-blue-400 hover:text-white p-2 rounded transition"
                   title="Download Configuration">
@@ -101,6 +113,8 @@
                       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
                 </a>
+
+                <!-- Delete -->
                 <button class="align-middle bg-gray-100 hover:bg-red-400 hover:text-white p-2 rounded transition"
                   title="Delete Client" @click="clientDelete = client">
                   <svg class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

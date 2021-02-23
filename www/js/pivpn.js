@@ -75,4 +75,18 @@ class PiVPN {
     });
   }
 
+  async enableWireGuardClient({ name }) {
+    return this.call({
+      method: 'post',
+      path: `/wireguard/client/${name}/enable`,
+    });
+  }
+
+  async disableWireGuardClient({ name }) {
+    return this.call({
+      method: 'post',
+      path: `/wireguard/client/${name}/disable`,
+    });
+  }
+
 }

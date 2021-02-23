@@ -22,20 +22,17 @@ new Vue({
         minute: 'numeric',
       }).format(value);
     },
-    refresh() {
+    async refresh() {
       if( !this.authenticated ) return;
 
-      this.pi.getWireGuardClientsStatus()
-        .then(clients => {
-          this.clients = clients.map(client => {
-            if( client.name.includes('@') && client.name.includes('.') ) {
-              client.avatar = `https://www.gravatar.com/avatar/${md5(client.name)}?d=blank`
-            }
+      const clients = await this.pi.getWireGuardClientsStatus()
+      this.clients = clients.map(client => {
+        if( client.name.includes('@') && client.name.includes('.') ) {
+          client.avatar = `https://www.gravatar.com/avatar/${md5(client.name)}?d=blank`
+        }
 
-            return client;
-          });
-        })
-        .catch(err => this.error = err);
+        return client;
+      });
     },
     login(e) {
       e.preventDefault();
@@ -54,7 +51,7 @@ new Vue({
           this.authenticated = session.authenticated;
           this.hostname = session.hostname || null;
           this.username = session.username || null;
-          this.refresh();
+          return this.refresh();
         })
         .catch(err => {
           alert(err.message || err.toString());
@@ -79,12 +76,22 @@ new Vue({
       if( !name ) return;
       this.pi.createWireGuardClient({ name })
         .catch(err => alert(err.message || err.toString()))
-        .finally(() => this.refresh())
+        .finally(() => this.refresh().catch(console.error))
     },
     deleteClient({ name }) {
       this.pi.deleteWireGuardClient({ name })
         .catch(err => alert(err.message || err.toString()))
-        .finally(() => this.refresh())
+        .finally(() => this.refresh().catch(console.error))
+    },
+    enableClient({ name }) {
+      this.pi.enableWireGuardClient({ name })
+        .catch(err => alert(err.message || err.toString()))
+        .finally(() => this.refresh().catch(console.error))
+    },
+    disableClient({ name }) {
+      this.pi.disableWireGuardClient({ name })
+        .catch(err => alert(err.message || err.toString()))
+        .finally(() => this.refresh().catch(console.error))
     },
   },
   filters: {
@@ -113,12 +120,16 @@ new Vue({
         this.authenticated = session.authenticated;
         this.hostname = session.hostname || null;
         this.username = session.username || null;
-        this.refresh();
+        this.refresh().catch(err => {
+          alert(err.message || err.toString());
+        });
       })
       .catch(err => {
         alert(err.message || err.toString());
       })
 
-    setInterval(() => this.refresh(), 1000);
+    setInterval(() => {
+      this.refresh().catch(console.error);
+    }, 1000);
   },
 });
