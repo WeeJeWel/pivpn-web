@@ -14,7 +14,7 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 
 * A beautiful & easy to use UI
 * Easy installation: just one command
-* List, create & delete users
+* List, create, delete, enable & disable users
 * Show a user's QR code
 * Download a user's configuration file
 * See which users are connected
