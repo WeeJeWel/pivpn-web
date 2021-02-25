@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  pivpn-web:
+    image: weejewel/pivpn-web
+    container_name: pivpn-web
+    ports:
+      - "51821:51821"
+    restart: unless-stopped
+    environment:
+      # Uncomment this to connect to a remote PiVPN host
+      # - SSH_HOST=192.168.1.2
+      # - SSH_PORT=22
