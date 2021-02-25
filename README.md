@@ -20,7 +20,7 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 * See which users are connected
 * Log in with your Linux username & password
 * Connects to your local PiVPN installation — or remote over SSH
-* Gravatar support 🎉
+* Gravatar support 😏
 
 ## Requirements
 
