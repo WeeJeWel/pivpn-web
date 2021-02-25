@@ -44,7 +44,7 @@
               </svg>
               <img v-if="client.avatar" :src="client.avatar" class="w-10 rounded-full absolute top-0 left-0" />
 
-              <div v-if="client.endpoint">
+              <div v-if="client.latestHandshake && ((new Date() - new Date(client.latestHandshake) < 1000 * 60 * 10))">
                 <div class="animate-ping w-4 h-4 p-1 bg-green-100 rounded-full absolute -bottom-1 -right-1"></div>
                 <div class="w-2 h-2 bg-green-300 rounded-full absolute bottom-0 right-0"></div>
               </div>
