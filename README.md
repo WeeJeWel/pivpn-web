@@ -56,7 +56,7 @@ docker run -d -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-we
 
 > 💡 You can set the environment variable `SSH_HOST` to a hostname/IP to connect to a different PiVPN server than PiVPN Web is running on.
 
-> 💡 To update to the latest version, run `docker stop pivpn-web`, then `docker rm pivpn-web`, and finally `docker run -d -p 518...` as described above again.
+> 💡 To update to the latest version, run `docker stop pivpn-web`, then `docker rm pivpn-web`, then `docker pull weejewel/pivpn-web`, and finally `docker run -d -p 518...` as described above again.
 
 ## Usage
 
