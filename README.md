@@ -20,7 +20,7 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 * See which users are connected
 * Log in with your Linux username & password
 * Connects to your local PiVPN installation — or remote over SSH
-* Gravatar support 🎉
+* Gravatar support 😏
 
 ## Requirements
 
@@ -55,6 +55,8 @@ docker run -d -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-we
 > 💡 Remove the `restart=always` flag to prevent auto-start on boot.
 
 > 💡 You can set the environment variable `SSH_HOST` to a hostname/IP to connect to a different PiVPN server than PiVPN Web is running on.
+
+> 💡 To update to the latest version, run `docker stop pivpn-web`, then `docker rm pivpn-web`, then `docker pull weejewel/pivpn-web`, and finally `docker run -d -p 518...` as described above again.
 
 ## Usage
 
