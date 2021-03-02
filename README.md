@@ -58,6 +58,8 @@ docker run -d -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-we
 
 > 💡 To update to the latest version, run `docker stop pivpn-web`, then `docker rm pivpn-web`, then `docker pull weejewel/pivpn-web`, and finally `docker run -d -p 518...` as described above again.
 
+> 💡 There's also a [`docker-compose.yml`](https://github.com/WeeJeWel/pivpn-web/blob/master/docker-compose.yml) file.
+
 ## Usage
 
 Open `http://<ip-of-your-pi>:51821` and log in with your Raspberry Pi username & password.
