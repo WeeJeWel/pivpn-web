@@ -66,4 +66,4 @@ Open `http://<ip-of-your-pi>:51821` and log in with your Raspberry Pi username &
 
 > 💡 The default Raspbian username is `pi` and the default password is `raspberry`.
 
-> 💡 When you client name is a valid Gravatar e-mail, they will be shown with their avatar.
+> 💡 When a client's name is a valid Gravatar e-mail, they will be shown with their avatar.
