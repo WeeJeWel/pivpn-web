@@ -33,7 +33,10 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 ### 1. Install Docker
 
 ```bash
-curl -L https://get.docker.com | bash
+sudo curl -L https://get.docker.com | bash
+
+# Add user 'pi' to group 'docker'
+sudo usermod -aG docker pi
 ```
 
 ### 2. Install PiVPN
