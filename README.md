@@ -1,9 +1,9 @@
 # PiVPN Web
 
 [![Build & Publish Docker Image to Docker Hub](https://github.com/WeeJeWel/pivpn-web/actions/workflows/deploy.yml/badge.svg?branch=production)](https://github.com/WeeJeWel/pivpn-web/actions/workflows/deploy.yml)
-[![Docker](https://img.shields.io/docker/v/weejewel/pivpn-web/latest)](http://hub.docker.com/repository/docker/weejewel/pivpn-web)
-[![Docker](https://img.shields.io/docker/pulls/weejewel/pivpn-web.svg)](http://hub.docker.com/repository/docker/weejewel/pivpn-web)
-
+[![Docker](https://img.shields.io/docker/v/weejewel/pivpn-web/latest)](https://hub.docker.com/r/weejewel/pivpn-web)
+[![Docker](https://img.shields.io/docker/pulls/weejewel/pivpn-web.svg)](https://hub.docker.com/r/weejewel/pivpn-web)
+[![Sponsor](https://img.shields.io/github/sponsors/weejewel)](https://github.com/sponsors/WeeJeWel)
 
 
 PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
@@ -33,7 +33,12 @@ PiVPN Web is an open-source Web UI for PiVPN (when using WireGuard).
 ### 1. Install Docker
 
 ```bash
-curl -L https://get.docker.com | bash
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Add user 'pi' to group 'docker'
+sudo usermod -aG docker pi
 ```
 
 ### 2. Install PiVPN
@@ -58,10 +63,12 @@ docker run -d -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-we
 
 > 💡 To update to the latest version, run `docker stop pivpn-web`, then `docker rm pivpn-web`, then `docker pull weejewel/pivpn-web`, and finally `docker run -d -p 518...` as described above again.
 
+> 💡 There's also a [`docker-compose.yml`](https://github.com/WeeJeWel/pivpn-web/blob/master/docker-compose.yml) file.
+
 ## Usage
 
 Open `http://<ip-of-your-pi>:51821` and log in with your Raspberry Pi username & password.
 
 > 💡 The default Raspbian username is `pi` and the default password is `raspberry`.
 
-> 💡 When you client name is a valid Gravatar e-mail, they will be shown with their avatar.
+> 💡 When a client's name is a valid Gravatar e-mail, they will be shown with their avatar.
