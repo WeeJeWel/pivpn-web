@@ -5,6 +5,7 @@ new Vue({
     authenticating: false,
     username: null,
     password: null,
+    multiFactorAuthCode: null,
 
     clients: null,
     clientDelete: null,
@@ -45,6 +46,7 @@ new Vue({
       this.pi.createSession({
         username: this.username,
         password: this.password,
+        multiFactorAuthCode: this.multiFactorAuthCode,
       })
         .then(async () => {
           const session = await this.pi.getSession()
