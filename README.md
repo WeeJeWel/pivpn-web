@@ -71,6 +71,14 @@ Open `http://<ip-of-your-pi>:51821` and log in with your Raspberry Pi username &
 
 > 💡 When a client's name is a valid Gravatar e-mail, they will be shown with their avatar.
 
+## Supported environment variables
+| Variable   | Default    | Comment                             |
+|:-----------|:--------   |:------------------------------------|
+| PORT       | 51821      | The listening port (number)         |
+| SSH_HOST   | 172.17.0.1 | The SSH host to connect to (ip)     |
+| SSH_PORT   | 22         | The SSH port to connect to (number) |
+| ENABLE_2FA | no         | Enable 2FA login support (yes/no)   |
+
 ## Updating
 
 Run these commands to update to the latest version.

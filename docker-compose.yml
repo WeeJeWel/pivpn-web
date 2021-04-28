@@ -10,3 +10,5 @@ services:
       # Uncomment this to connect to a remote PiVPN host
       # - SSH_HOST=192.168.1.2
       # - SSH_PORT=22
+      # Uncomment this to enable support for 2FA login
+      # - ENABLE_2FA=yes

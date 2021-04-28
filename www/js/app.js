@@ -6,6 +6,7 @@ new Vue({
     username: null,
     password: null,
     multiFactorAuthCode: null,
+    useMfa: false,
 
     clients: null,
     clientDelete: null,
@@ -114,6 +115,14 @@ new Vue({
       }
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
     }
+  },
+  created() {
+    this.useMfa = document.cookie
+      ?.split(';')
+      ?.find(e => e.includes('useMfa='))
+      ?.split('=')
+      ?.pop()
+      ?.toLowerCase() == 'true';
   },
   mounted() {
     this.pi = new PiVPN();
