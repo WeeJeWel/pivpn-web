@@ -15,7 +15,7 @@ class PiVPN {
 
     if( res.status === 204 )
       return undefined;
-      
+
     const json = await res.json();
 
     if( !res.ok ) {
@@ -32,11 +32,11 @@ class PiVPN {
     });
   }
 
-  async createSession({ username, password }) {
+  async createSession({ username, password, multiFactorAuthCode }) {
     return this.call({
       method: 'post',
       path: '/session',
-      body: { username, password },
+      body: { username, password, multiFactorAuthCode },
     });
   }
 

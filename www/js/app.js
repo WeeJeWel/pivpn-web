@@ -5,6 +5,8 @@ new Vue({
     authenticating: false,
     username: null,
     password: null,
+    multiFactorAuthCode: null,
+    useMfa: false,
 
     clients: null,
     clientDelete: null,
@@ -45,6 +47,7 @@ new Vue({
       this.pi.createSession({
         username: this.username,
         password: this.password,
+        multiFactorAuthCode: this.multiFactorAuthCode,
       })
         .then(async () => {
           const session = await this.pi.getSession()
@@ -112,6 +115,14 @@ new Vue({
       }
       return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
     }
+  },
+  created() {
+    this.useMfa = document.cookie
+      ?.split(';')
+      ?.find(e => e.includes('useMfa='))
+      ?.split('=')
+      ?.pop()
+      ?.toLowerCase() == 'true';
   },
   mounted() {
     this.pi = new PiVPN();

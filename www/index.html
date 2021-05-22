@@ -327,7 +327,8 @@
 
         <input type="text" name="username" placeholder="pi" v-model="username" class="px-2 py-1 text-sm text-gray-500 mb-2 border-2 border-gray-100 rounded-lg w-full focus:border-green-400 outline-none" />
         <input type="password" name="password" placeholder="raspberry" v-model="password" class="px-2 py-1 text-sm text-gray-500 mb-5 border-2 border-gray-100 rounded-lg w-full focus:border-green-400 outline-none" />
-       
+        <input type="text" name="multiFactorAuthCode" v-if="useMfa" placeholder="2FA Code" v-model="multiFactorAuthCode" class="px-2 py-1 text-sm text-gray-500 mb-5 border-2 border-gray-100 rounded-lg w-full focus:border-green-400 outline-none" />
+
         <button v-if="authenticating" class="bg-green-400 w-full rounded shadow py-2 text-sm text-white cursor-not-allowed">
           <svg class="w-5 animate-spin mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
