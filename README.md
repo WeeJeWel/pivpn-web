@@ -54,14 +54,12 @@ curl -L https://install.pivpn.io | bash
 Run this command once to automatically start the service on boot.
 
 ```bash
-docker run -d -p 51821:51821 --name pivpn-web --restart=always weejewel/pivpn-web
+docker run -d -p 51821:51821 --name pivpn-web --restart=unless-stopped weejewel/pivpn-web
 ```
 
 > 💡 Remove the `restart=always` flag to prevent auto-start on boot.
 
 > 💡 You can set the environment variable `SSH_HOST` to a hostname/IP to connect to a different PiVPN server than PiVPN Web is running on.
-
-> 💡 To update to the latest version, run `docker stop pivpn-web`, then `docker rm pivpn-web`, then `docker pull weejewel/pivpn-web`, and finally `docker run -d -p 518...` as described above again.
 
 > 💡 There's also a [`docker-compose.yml`](https://github.com/WeeJeWel/pivpn-web/blob/master/docker-compose.yml) file.
 
@@ -72,3 +70,22 @@ Open `http://<ip-of-your-pi>:51821` and log in with your Raspberry Pi username &
 > 💡 The default Raspbian username is `pi` and the default password is `raspberry`.
 
 > 💡 When a client's name is a valid Gravatar e-mail, they will be shown with their avatar.
+
+## Supported environment variables
+| Variable   | Default    | Comment                             |
+|:-----------|:--------   |:------------------------------------|
+| PORT       | 51821      | The listening port (number)         |
+| SSH_HOST   | 172.17.0.1 | The SSH host to connect to (ip)     |
+| SSH_PORT   | 22         | The SSH port to connect to (number) |
+| ENABLE_2FA | no         | Enable 2FA login support (yes/no)   |
+
+## Updating
+
+Run these commands to update to the latest version.
+
+```bash
+docker stop pivpn-web
+docker rm pivpn-web
+docker pull weejewel/pivpn-web
+docker run -d -p 51821:51821 --name pivpn-web --restart=unless-stopped weejewel/pivpn-web
+```
