@@ -1,3 +1,9 @@
+# 🗑 THIS PROJECT IS DEPRECATED 🗑
+
+**Please uninstall PiVPN and upgrade to [WireGuard Easy](https://github.com/WeeJeWel/wg-easy). It's much simpler and better! 🎉**
+
+---
+
 # PiVPN Web
 
 [![Build & Publish Docker Image to Docker Hub](https://github.com/WeeJeWel/pivpn-web/actions/workflows/deploy.yml/badge.svg?branch=production)](https://github.com/WeeJeWel/pivpn-web/actions/workflows/deploy.yml)
